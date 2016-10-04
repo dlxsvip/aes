@@ -8,7 +8,7 @@ import java.security.SecureRandom;
 
 /**
  * AES 加密工具 3.0 <br>
- * Created by y0507 on 2016/9/22.
+ * Created by yl on 2016/9/22.
  * <p/>
  *
  */
