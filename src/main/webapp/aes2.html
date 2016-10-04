@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="crypto-js/crypto-js.js"></script>
+    <script type="text/javascript" src="crypto-js/aes.js"></script>
+    <script type="text/javascript" src="crypto-js/md5.js"></script>
+</head>
+<body>
+<script>
+
+    var key = "123qaz";
+    //var iv  = CryptoJS.enc.Utf8.parse('1234567890123456');
+    var iv  = CryptoJS.lib.WordArray.random(8);
+    //var iv  = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Base64);
+
+    document.write("key:"+key+"<br>");
+    document.write("iv:"+iv+"<br>");
+    console.log(CryptoJS.AES);
+
+    var  encrypted = Encrypt("ylyan");
+    document.write("encode:"+encrypted+"<br>");
+    console.log(encrypted);
+
+    var decrypted = Decrypt(encrypted);
+    document.write("decode:"+decrypted+"<br>");
+    console.log(decrypted);
+
+
+
+    function Encrypt(word){
+
+        //var srcs = CryptoJS.enc.Utf8.parse(word);
+        //console.log(srcs);
+
+        //var encrypted = CryptoJS.AES.encrypt(word, key);
+        var encrypted = CryptoJS.AES.encrypt(word, key, { iv: iv,mode:CryptoJS.mode.CBC});
+
+        return encrypted.toString();
+    }
+
+    function Decrypt(word){
+
+        //var decrypt = CryptoJS.AES.decrypt(word, key);
+        var decrypt = CryptoJS.AES.decrypt(word, key, { iv: iv,mode:CryptoJS.mode.CBC});
+
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+    }
+
+
+
+</script>
+</body>
+</html>
