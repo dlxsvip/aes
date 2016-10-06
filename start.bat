@@ -4,7 +4,7 @@
 color 2f
 
 
-echo 提示:
+
 echo     【-e】: 加密
 echo     【-d】: 解密
 echo     【 q】: 退出

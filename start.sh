@@ -1,22 +1,46 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-echo -e "\033[32m=============================\033[0m"
-echo -e "\033[32m 提示: 退出请按【q + 回车】  \033[0m"
-echo -e "\033[32m 解密: 密文后加 -d 参数      \033[0m"
-echo -e "\033[32m=============================\033[0m"
+echo -e "\033[32m-----------------------------\033[0m"
+echo -e "\033[32m【-e】: 加密                 \033[0m"
+echo -e "\033[32m【-d】: 解密                 \033[0m"
+echo -e "\033[32m【 q】: 退出                 \033[0m"
+echo -e "\033[32m-----------------------------\033[0m"
 
 
-while :
-do
-    read -p "请输入密码 :" parms
-    if [ "$parms" == "" ];then
-        echo -e "\033[31merror:not null\033[0m"
-    elif [ "$parms" == "q" ];then
-        exit 0
-    else
-		arr=($parms)
-        java -jar `dirname $0`/lib/aes.jar  ${arr[@]}
-    fi
-done
+encryptFun(){
+	read -p "加密:" txt
+	if [ "$txt" == "" ];then
+		echo "" 
+	elif [ "$txt" == "q" ];then
+		exit 0
+	elif [ "$txt" == "-e" ];then
+		echo "" 
+	elif [ "$txt" == "-d" ];then
+		dncryptFun 
+	else
+		java -jar `dirname $0`/lib/aes.jar "-e" "$txt"
+	fi
+	encryptFun
+}
 
+
+
+dncryptFun(){
+	read -p "解密:" txt
+	if [ "$txt" == "" ];then
+		echo "" 
+	elif [ "$txt" == "q" ];then
+		exit 0
+	elif [ "$txt" == "-e" ];then
+		encryptFun
+	elif [ "$txt" == "-d" ];then
+		echo "" 
+	else
+		java -jar `dirname $0`/lib/aes.jar "-d" "$txt"
+	fi
+	dncryptFun
+}
+
+
+encryptFun
 
