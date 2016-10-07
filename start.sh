@@ -42,5 +42,11 @@ dncryptFun(){
 }
 
 
-encryptFun
-
+case "$1" in
+	-e)
+		encryptFun ;;
+	-d)
+		dncryptFun ;;
+	 *)
+		encryptFun ;;
+esac
